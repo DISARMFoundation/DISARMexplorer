@@ -15,7 +15,8 @@
           <h1>{{ playbook.disarm_id }} {{ playbook.name }}</h1>
         </div>
       </header>
-      <p class="summary">Summary: {{ playbook.summary }} - <a class="action" href="{{ url_for('playbook.update', id=playbook.id) }}">Edit</a></p>
+      <p class="summary">Summary: {{ playbook.summary }} {% if g.user %}- <a class="action" href="{{ url_for('playbook.update', id=playbook.id) }}">Edit</a>{% endif %}
+      </p>
     </article>
     {% if not loop.last %}
       <hr>

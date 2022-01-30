@@ -14,6 +14,8 @@
   {% endfor %}
 </p>
 
+{% if g.user %}
 <p class="actions"><a class="action" href="{{ url_for('detection.update', id=detection.id) }}">Edit</a></p>
+{% endif %}
 {% endblock %}
 

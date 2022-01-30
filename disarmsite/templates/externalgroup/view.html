@@ -18,6 +18,8 @@
 <p class="twitter_handle">Twitter handle: {{ externalgroup.twitter_handle }}</p>
 <p class="summary">Summary: {{ externalgroup.summary }}</p>
 
-<p class="actions"><a class="action" href="{{ url_for('externalgroup.update', id=externalgroup.id) }}">Edit</a></p>
+{% if g.user %}
+  <p class="actions"><a class="action" href="{{ url_for('externalgroup.update', id=externalgroup.id) }}">Edit</a></p>
+{% endif %}
 {% endblock %}
 

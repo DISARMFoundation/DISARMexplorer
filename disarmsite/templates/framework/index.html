@@ -14,7 +14,8 @@
         <div>
           <h1>{{ framework['disarm_id'] }} {{ framework['name'] }}</h1>
       </header>
-      <p class="summary">{{ framework['summary'] }} - <a class="action" href="{{ url_for('framework.update', id=framework['id']) }}">Edit</a></p>
+      <p class="summary">{{ framework['summary'] }} {% if g.user %} - <a class="action" href="{{ url_for('framework.update', id=framework['id']) }}">Edit</a>{% endif %}
+      </p> 
     </article>
     {% if not loop.last %}
       <hr>

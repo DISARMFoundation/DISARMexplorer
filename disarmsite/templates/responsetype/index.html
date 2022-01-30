@@ -15,7 +15,7 @@
           <h1>{{ responsetype.disarm_id }} {{ responsetype.name }}</h1>
         </div>
       </header>
-      <p class="summary">Summary: {{ responsetype.summary }} - <a class="action" href="{{ url_for('responsetype.update', id=responsetype.id) }}">Edit</a></p>
+      <p class="summary">Summary: {{ responsetype.summary }} {% if g.user %}- <a class="action" href="{{ url_for('responsetype.update', id=responsetype.id) }}">Edit</a> {% endif %}</p>
     </article>
     {% if not loop.last %}
       <hr>

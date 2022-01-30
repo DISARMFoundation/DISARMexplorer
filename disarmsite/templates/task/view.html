@@ -9,6 +9,8 @@
 <p class="tactic">Tactic stage: {{ task['tactic_id'] }}</p>
 <p class="tactic">Framework: {{ task['framework_id'] }}</p>
 <p class="summary">Summary: {{ task['summary'] }}</p>
-<p class="actions"><a class="action" href="{{ url_for('task.update', id=task['id']) }}">Edit</a></p>
+{% if g.user %}
+  <p class="actions"><a class="action" href="{{ url_for('task.update', id=task['id']) }}">Edit</a></p>
+{% endif %}
 {% endblock %}
 

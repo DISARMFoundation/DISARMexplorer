@@ -8,7 +8,10 @@
 
 <p class="tactic">Tactic stage: {{ technique.tactic_id }}</p>
 <p class="summary">Summary: {{ technique.summary }}</p>
-<p class="actions"><a class="action" href="{{ url_for('technique.update', id=technique.id) }}">Edit</a></p>
+{% if g.user %}
+  <p class="actions"><a class="action" href="{{ url_for('technique.update', id=technique.id) }}">Edit</a>
+{% endif %}
+</p>
 
 <hr>
 <h3>Relationships</h3>

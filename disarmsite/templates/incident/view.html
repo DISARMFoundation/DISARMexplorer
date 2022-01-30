@@ -14,7 +14,9 @@
 <li>Attributions seen: {{ incident.attributions_seen }}</li>
 </ul>
 <p class="summary">Summary: {{ incident.summary }}</p>
-<p class="actions"><a class="action" href="{{ url_for('incident.update', id=incident.id) }}">Edit</a></p>
+{% if g.user %}
+  <p class="actions"><a class="action" href="{{ url_for('incident.update', id=incident.id) }}">Edit</a></p>
+{% endif %}
 
 <hr>
 <h3>Relationships</h3>

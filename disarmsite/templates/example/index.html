@@ -15,7 +15,7 @@
           <h1>{{ example.disarm_id }} {{ example.name }}</h1>
         </div>
       </header>
-      <p class="summary">Summary: {{ example.summary }} - <a class="action" href="{{ url_for('example.update', id=example.id) }}">Edit</a></p>
+      <p class="summary">Summary: {{ example.summary }} {% if g.user %}- <a class="action" href="{{ url_for('example.update', id=example.id) }}">Edit</a>{% endif %}</p>
     </article>
     {% if not loop.last %}
       <hr>

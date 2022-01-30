@@ -16,7 +16,8 @@
           <div class="about">Phase: {{ tactic['phase_id'] }}</div>
         </div>
       </header>
-      <p class="summary">{{ tactic['summary'] }} -  <a class="action" href="{{ url_for('tactic.update', id=tactic['id']) }}">Edit</a></p>
+      <p class="summary">{{ tactic['summary'] }} {% if g.user %}-  <a class="action" href="{{ url_for('tactic.update', id=tactic['id']) }}">Edit</a>{% endif %}
+      </p>
     </article>
     {% if not loop.last %}
       <hr>
