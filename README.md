@@ -1,4 +1,4 @@
-# DISARM Flask webaite
+# DISARM Flask website
 Code for an online viewer of the DISARM frameworks and datasets. 
 
 Written in Python, Flask, D3. 
