@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Tools{% endblock %}</h1>
+  {% if g.user %}
+    <a class="action" href="{{ url_for('tool.create') }}">New</a>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  {% for tool in tools %}
+    <article class="tool">
+      <header>
+        <div>
+          <h1>{{ tool.disarm_id }} {{ tool.name }}</h1>
+        </div>
+      </header>
+      <p class="summary">Summary: {{ tool.summary }} - <a class="action" href="{{ url_for('tool.view', id=tool.id) }}">Details</a></p>
+    </article>
+    {% if not loop.last %}
+      <hr>
+    {% endif %}
+  {% endfor %}
+{% endblock %}
+

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Welcome to DISARM{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+
+  <div>
+
+<p>DISARM is a set of frameworks for describing and understanding disinformation incidents. <a class="about" href="{{ url_for('about') }}">Learn more about DISARM</a></p>
+<hr>
+  </div>
+  <div>
+
+<h3>DISARM Objects</h3>
+
+Framework objects:
+<ul>
+    <li><a class="framework" href="{{ url_for('framework.index') }}">Frameworks</a></li>
+    <li><a class="phase" href="{{ url_for('phase.index') }}">Phases</a></li>
+    <li><a class="tactic" href="{{ url_for('tactic.index') }}">Tactics</a></li>
+    <li><a class="technique" href="{{ url_for('technique.index') }}">Techniques</a></li>
+    <li><a class="task" href="{{ url_for('task.index') }}">Tasks</a></li>
+    <li><a class="counter" href="{{ url_for('counter.index') }}">Countermeasures</a></li>
+    <li><a class="detection" href="{{ url_for('detection.index') }}">Detections</a></li>
+    <li><a class="responsetype" href="{{ url_for('responsetype.index') }}">Responsetypes</a></li>
+    <li><a class="metatechnique" href="{{ url_for('metatechnique.index') }}">Metatechniques</a></li>
+    <li><a class="playbook" href="{{ url_for('playbook.index') }}">Playbooks</a></li>
+    <li><a class="resource" href="{{ url_for('resource.index') }}">Resources</a></li>
+    <!-- Add: actortypes,  -->
+</ul>
+
+Datasets:
+<ul>
+    <li><a class="incident" href="{{ url_for('incident.index') }}">Incidents</a></li>
+    <li><a class="example" href="{{ url_for('example.index') }}">Examples</a></li>
+    <li><a class="group" href="{{ url_for('organization.index') }}">Organizations</a></li>
+    <li><a class="tool" href="{{ url_for('tool.index') }}">Tools</a></li>
+</ul>
+<hr>
+</div>
+
+{% endblock %}

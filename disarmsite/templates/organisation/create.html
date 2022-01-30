@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}New Organization{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+    <label for="name">Name</label>
+    <input name="name" id="name" value="{{ request.form['name'] }}" required>
+    <label for="disarm_id">Disarm id</label>
+    <input name="disarm_id" id="disarm_id" value="{{ request.form['disarm_id'] }}" required>
+    <label for="summary">Summary</label>
+    <textarea name="summary" id="summary">{{ request.form['summary'] }}</textarea>
+    <input type="submit" value="Save">
+  </form>
+{% endblock %}
+

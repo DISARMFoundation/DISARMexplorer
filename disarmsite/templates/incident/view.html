@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}{{ incident.disarm_id }} "{{ incident.name }}"{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+
+<p class="details">
+<ul>
+<li>Object type: {{ incident.objecttype }}</li>
+<li>Year started: {{ incident.year_started }}</li>
+<li>Found in country: {{ incident.found_in_country }}</li>
+<li>Attributions seen: {{ incident.attributions_seen }}</li>
+</ul>
+<p class="summary">Summary: {{ incident.summary }}</p>
+<p class="actions"><a class="action" href="{{ url_for('incident.update', id=incident.id) }}">Edit</a></p>
+
+<hr>
+<h3>Relationships</h3>
+<p class="techniques">Uses techniques: 
+  <ul>
+    {% for technique in techniques %}
+      <div class="technique"><li><strong>{{ technique.technique_id }}</strong> as {{ technique.name }}: {{ technique.summary }}</li></div>
+    {% endfor %}
+  </ul>
+</p>
+
+{% endblock %}
+

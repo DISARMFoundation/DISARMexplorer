@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Techniques{% endblock %}</h1>
+  {% if g.user %}
+    <a class="action" href="{{ url_for('technique.create') }}">New</a>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  <div id="redgrid"></div>
+  <script type="text/javascript">
+    fillGrid({{gridparams|tojson}})
+  </script>
+
+  {% for technique in techniques %}
+    <article class="technique">
+      <header>
+        <div>
+          <h1>{{ technique['disarm_id'] }} {{ technique['name'] }}</h1>
+          <div class="tactic">Tactic stage: {{ technique['tactic_id'] }}</div>
+        </div>
+      </header>
+      <p class="summary">Summary: {{ technique['summary'] }} - <a class="action" href="{{ url_for('technique.view', id=technique['id']) }}">Details</a></p>
+    </article>
+    {% if not loop.last %}
+      <hr>
+    {% endif %}
+  {% endfor %}
+{% endblock %}
+

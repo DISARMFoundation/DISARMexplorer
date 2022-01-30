@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}{{ organization.disarm_id }} "{{ organization.name }}"{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+
+<p class="url">URL: <a href="{{ organization.url }}">{{ organization.url }}</a></p>
+<p class="sector">Sector: {{ organization.sector }}</p>
+<p class="primary_role">Primary role: {{ organization.primary_role }}</p>
+<p class="secondary_role">Secondary role: {{ organization.secondary_role }}</p>
+<p class="primary_subject">Primary subject: {{ organization.primary_subject }}</p>
+<p class="secondary_subject">Secondary subject: {{ organization.secondary_subject }}</p>
+<p class="volunteers">Has volunteers: {{ organization.volunteers }}</p>
+<p class="region">Region: {{ organization.region }}</p>
+<p class="country">Country: {{ organization.country }}</p>
+<p class="twitter_handle">Twitter handle: {{ organization.twitter_handle }}</p>
+<p class="summary">Summary: {{ organization.summary }}</p>
+
+<p class="actions"><a class="action" href="{{ url_for('organization.update', id=organization.id) }}">Edit</a></p>
+{% endblock %}
+

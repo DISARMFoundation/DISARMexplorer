@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Incidents{% endblock %}</h1>
+  {% if g.user %}
+    <a class="action" href="{{ url_for('incident.create') }}">New</a>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  {% for incident in incidents %}
+    <article class="incident">
+      <header>
+        <div>
+          <h1>{{ incident.disarm_id }} {{ incident.name }}</h1>
+        </div>
+      </header>
+      <p class="summary">Summary: {{ incident.summary }} - <a class="action" href="{{ url_for('incident.view', id=incident.id) }}">Details</a></p>
+    </article>
+    {% if not loop.last %}
+      <hr>
+    {% endif %}
+  {% endfor %}
+{% endblock %}
+

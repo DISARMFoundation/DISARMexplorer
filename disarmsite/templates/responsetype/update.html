@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Edit "{{ responsetype.name }}"{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+    <label for="name">Name</label>
+    <input name="name" id="name"
+      value="{{ request.form['name'] or responsetype.name }}" required>
+    <label for="rank">Disarm id</label>
+    <input name="disarm_id" id="disarm_id"
+      value="{{ request.form['disarm_id'] or responsetype.disarm_id }}" required>
+    <label for="summary">Summary</label>
+    <textarea name="summary" id="summary">{{ request.form['summary'] or responsetype.summary }}</textarea>
+    <input type="submit" value="Save">
+  </form>
+  <hr>
+  <form action="{{ url_for('responsetype.delete', id=responsetype.id) }}" method="post">
+    <input class="danger" type="submit" value="Delete" onclick="return confirm('Are you sure?');">
+  </form>
+{% endblock %}
+

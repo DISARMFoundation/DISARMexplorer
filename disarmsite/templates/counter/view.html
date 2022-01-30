@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}{{ counter.disarm_id }} "{{ counter.name }}"{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+
+<p class="tactic">Tactic stage: {{ counter.tactic_id }}</p>
+<p class="metatechnique">Metatechnique: {{ counter.metatechnique_id }}</p>
+<p class="summary">Summary: {{ counter.summary }}</p>
+<p class="techniques">Counters techniques: 
+    {% for technique in techniques %}
+      <div class="technique"><a class="action" href="{{ url_for('technique.view', id=technique.id) }}">{{ technique.disarm_id }} {{ technique.name }}</a></div>
+  {% endfor %}
+</p>
+
+<p class="actions"><a class="action" href="{{ url_for('counter.update', id=counter.id) }}">Edit</a></p>
+{% endblock %}
+

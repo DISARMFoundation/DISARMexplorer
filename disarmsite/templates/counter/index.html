@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Counters{% endblock %}</h1>
+  {% if g.user %}
+    <a class="action" href="{{ url_for('counter.create') }}">New</a>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  <div id="bluegrid"></div>
+  <script type="text/javascript">
+    fillGrid({{gridparams|tojson}})
+  </script>
+
+  {% for counter in counters %}
+    <article class="counter">
+      <header>
+        <div>
+          <h1>{{ counter.disarm_id }} {{ counter.name }}</h1>
+          <div class="tactic">Tactic stage: {{ counter.tactic_id }}</div>
+        </div>
+      </header>
+      <p class="summary">Summary: {{ counter.summary }} - <a class="action" href="{{ url_for('counter.view', id=counter.id) }}">Details</a></p>
+    </article>
+    {% if not loop.last %}
+      <hr>
+    {% endif %}
+  {% endfor %}
+{% endblock %}
+

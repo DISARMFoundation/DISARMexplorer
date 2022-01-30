@@ -1,0 +1,6 @@
+Flask==1.1.2
+Flask-Migrate==3.0.1
+Flask-SQLAlchemy==2.5.1
+gunicorn==20.1.0
+psycopg2==2.9.1
+pandas

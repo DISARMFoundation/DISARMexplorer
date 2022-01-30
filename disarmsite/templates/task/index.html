@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Tasks{% endblock %}</h1>
+  {% if g.user %}
+    <a class="action" href="{{ url_for('task.create') }}">New</a>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  {% for task in tasks %}
+    <article class="task">
+      <header>
+        <div>
+          <h1>{{ task['disarm_id'] }} {{ task['name'] }}</h1>
+        </div>
+      </header>
+      <p class="belongsto">Framework: {{ task['framework_id'] }}, Tactic stage: {{ task['tactic_id'] }}</p>
+      <p class="summary">Summary: {{ task['summary'] }} - <a class="action" href="{{ url_for('task.view', id=task['id']) }}">Details</a></p>
+    </article>
+    {% if not loop.last %}
+      <hr>
+    {% endif %}
+  {% endfor %}
+{% endblock %}
+

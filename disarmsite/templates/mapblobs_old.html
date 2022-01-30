@@ -1,0 +1,61 @@
+<html>
+    <head>
+        <style>
+            path {
+                stroke:white;
+                stroke-width: 0.5px;
+                fill:#EBEBE0;
+            }
+
+            #float-button-group {
+                position:fixed;
+                left:10;
+                opacity:0.5;
+            }
+
+            #float-button-group:hover {
+                opacity:1;
+            }
+
+            #map {
+                background: skyblue;
+                width: 965px;
+                height: 505px;
+                border: 3px solid steelblue;
+            }
+
+            #map-zoomer {
+                position:absolute;
+                writing-mode: bt-lr;
+                -webkit-appearance: slider-vertical;
+                width: 8px;
+                height: 100px;
+                padding: 0 5px;
+                position: absolute;
+                top:110px;
+                left:22px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="map">
+            <div class="btn-group-vertical" role="group" aria-label="..." id="float-button-group">
+                <button type="button" class="btn btn-default" id="zoom-in"><span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span></button>
+                <button type="button" class="btn btn-default" id="zoom-out"><span class="glyphicon glyphicon-zoom-out" aria-hidden="true"></span></button>
+                <button type="button" class="btn btn-default" id="reset"><span class="glyphicon glyphicon-screenshot" aria-hidden="true"></span></button>
+            </div>
+            <input type="range" value="1" min="1" max="8" orient="vertical" id="map-zoomer"/>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script src="https://d3js.org/d3.v3.min.js"></script>
+        <script src="https://d3js.org/topojson.v0.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+        <script type="text/javascript" src='static/mapblobs.js'></script>
+
+        <script type="text/javascript">
+            makemap({{array|tojson}})
+        </script>
+    </body>
+
+</html>

@@ -1,0 +1,23 @@
+<html>
+<head>
+	<script src="https://d3js.org/d3.v4.min.js"></script>
+</head>
+<body>
+	<H2>TESTBED: DISARM techniques and countermeasures</H2>
+
+	<table>
+		<tr>
+			<td><div id="redgrid"></div></td>
+		</tr><tr>
+			<td><div id="bluegrid"></div></td>
+		</tr>
+	</table>
+
+<script type="text/javascript" src='static/textgrid.js'></script>
+<script type="text/javascript">
+    fillGrid({{redgridparams|tojson}});
+    fillGrid({{bluegridparams|tojson}});
+</script>
+
+</body>
+</html>

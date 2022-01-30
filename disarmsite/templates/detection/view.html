@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}{{ detection.disarm_id }} "{{ detection.name }}"{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+
+<p class="tactic">Tactic stage: {{ detection.tactic_id }}</p>
+<p class="summary">Summary: {{ detection.summary }}</p>
+<p class="techniques">Detects techniques: 
+    {% for technique in techniques %}
+      <div class="technique"><a class="action" href="{{ url_for('technique.view', id=technique.id) }}">{{ technique.disarm_id }} {{ technique.name }}</a></div>
+  {% endfor %}
+</p>
+
+<p class="actions"><a class="action" href="{{ url_for('detection.update', id=detection.id) }}">Edit</a></p>
+{% endblock %}
+

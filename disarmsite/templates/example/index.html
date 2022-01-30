@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Examples{% endblock %}</h1>
+  {% if g.user %}
+    <a class="action" href="{{ url_for('example.create') }}">New</a>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  {% for example in examples %}
+    <article class="example">
+      <header>
+        <div>
+          <h1>{{ example.disarm_id }} {{ example.name }}</h1>
+        </div>
+      </header>
+      <p class="summary">Summary: {{ example.summary }} - <a class="action" href="{{ url_for('example.update', id=example.id) }}">Edit</a></p>
+    </article>
+    {% if not loop.last %}
+      <hr>
+    {% endif %}
+  {% endfor %}
+{% endblock %}
+

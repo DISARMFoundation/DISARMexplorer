@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}{{ tool.disarm_id }} "{{ tool.name }}"{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+
+<p class="url">URL: <a href="{{ tool.url }}">{{ tool.url }}</a></p>
+<p class="organization">Organization: {{ tool.organization }}</p>
+<p class="category">Category: {{ tool.category }}</p>
+<p class="disinformation_use">Disinformation use: {{ tool.disinformation_use }}</p>
+<p class="cogseccollab_use">Cogseccollab use: {{ tool.cogseccollab_use }}</p>
+<p class="function">Function: {{ tool.function }}</p>
+<p class="code_url">Code_url: {{ tool.code_url }}</p>
+<p class="artifacts">Artifacts: {{ tool.artifacts }}</p>
+<p class="automation">Automation: {{ tool.automation }}</p>
+<p class="platform">Platform: {{ tool.platform }}</p>
+<p class="accessibility">Accessibility: {{ tool.accessibility }}</p>
+<p class="summary">Summary: {{ tool.summary }}</p>
+
+<p class="actions"><a class="action" href="{{ url_for('tool.update', id=tool.id) }}">Edit</a></p>
+{% endblock %}
+

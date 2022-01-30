@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Resources{% endblock %}</h1>
+  {% if g.user %}
+    <a class="action" href="{{ url_for('resource.create') }}">New</a>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  {% for resource in resources %}
+    <article class="resource">
+      <header>
+        <div>
+          <h1>{{ resource.disarm_id }} {{ resource.name }}</h1>
+        </div>
+      </header>
+      <p class="summary">Summary: {{ resource.summary }} - <a class="action" href="{{ url_for('resource.update', id=resource.id) }}">Edit</a></p>
+    </article>
+    {% if not loop.last %}
+      <hr>
+    {% endif %}
+  {% endfor %}
+{% endblock %}
+

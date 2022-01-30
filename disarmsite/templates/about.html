@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}About the DISARM frameworks{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+
+  <div>
+
+<p>The DISARM frameworks are designed for describing and understanding different parts of disinformation incidents, and are:
+<ul>
+<li><strong>DISARM-STIX</strong> for disinformation objects, including actors, behaviours, narratives and artifacts - this makes it easy for DISARM data to be passed between ISAOs and similar bodies using standards like TAXII.</li>
+<li><strong>DISARM Red</strong> for disinformation creation behaviours</li>
+<li><strong>DISARM Blue</strong> for disinformation countermeasure and mitigation behaviours.</li>
+</ul></p>
+
+<p>DISARM is part of work on adapting information security (infosec) practices to help track and counter misinformation, and is designed to fit existing infosec practices and tools. To help with this, DISARM's style is based on the <a href='https://github.com/mitre-attack/attack-website/'>MITRE ATT&CK</a> and STIX information security frameworks.</p>  
+
+<p>DISARM frameworks and data are available under a CC-BY-4.0 license - credit us (ideally also tell us about potentially useful changes), and you're free to use them.  DISARM templates, datasets, and user guides are available in <a href="https://github.com/cogsec-collaborative/DISARM">https://github.com/cogsec-collaborative/DISARM</a>. If you're using other tools, DISARM is embedded in the MISP toolset, and STIX templates for DISARM objects are available in the <a href='https://github.com/cogsec-collaborative/disarm_cti'>DISARM_CTI repository</a>. </p>
+
+<hr>
+</div>
+
+<div>
+  <h3>DISARM Contributors</h3>
+
+The DISARM frameworks are a community effort: 
+<ul>
+  <li><a href="http://cogsec-collab.org/">CogSecCollab</a> maintains and updates We've used DISARM in the CTI League's Covid19 responses, and tested it in trials with NATO, the EU, and several other countries' disinformation units. Pablo Breuer and  are the current design authorities for the DISARM models.</li>
+  <li>The Credibility Coalition's <a href="https://github.com/credcoalition/community-site/wiki/Working-Groups">Misinfosec working group</a>, aka MisinfosecWG, created the original DISARM frameworks. The Red Framework was started in December 2018, and refined in a Credibility Coalition Misinfosec seminar; the Blue Framework was started as a collection of potential disinformation countermeasures, at a Coalition Misinfosec seminar in November 2019. CogSecCollab is the nonprofit that spun out of MisinfosecWG.</li>
+  <li>Many other people have contributed to DISARM. Thank you.</li>
+</ul>
+
+<p>Suggestions for DISARM framework changes can be made through a <a href="https://docs.google.com/forms/d/e/1FAIpQLSdZuyKFp1UZzk6qUE4IN1O14HaJ-F4TH9thxR3hrRU-Mu7QUQ/viewform">Googleform</a>. Changes are then agreed between CogSecCollab and the DISARM design authorities - currently SJ Terp and Pablo Breuer. </p>
+
+  </div>
+
+  <div>
+<h3> What you're looking at here</h3>
+
+<p>You're looking at a work in progress. Eventually this message will be replaced with a pretty interface, but if you're here, it's good to say what's happening to get there.</p>  
+
+<p>We're working towards a set of functions for this app that include navigating a database of disinformation objects, being able to easily enter machine- and human-readable descriptions of misinformation and disinformation incidents, traverse through possibel behaviours as part of a red team exercise or simulation, and share machine-readable alerts with anyone connected to a information security system using the STIX message protocols. </p>
+
+<p>But to get there, we have to do some things first.  These include:
+  <ul>
+    <li>Transfer all the DISARM framework objects in our master repository into a SQL database format (actually two - SQLite and Postgresql), formalising all the objects that were implicit in it (like playbooks), and normalising all the relationships between them.  We're on this now</li>
+    <li>Making all those database objects visible in here, so a priviledged user can create, view, update and delete them - and a non-priviledged user can view all the objects, and suggest new objects, updates, and deletions. Also working on this</li>
+    <li>Separate data objects from framework objects.  What this means in practice is that the framework objects are the ways you describe an incident - standards for things like incidents, actors, behaviours, artifacts; data objects are instances of these, e.g. the Blacktivist incident and the behaviour and artifacts seen in it. This part is done.</li>
+    <li>Put all the DISARM standards and datasets into one place.  We have ATT&CK-based standards, STIX-based standards, lists of groups, tools, examples, references etc; we also have a set of MISP disinformation data standards for low-level objects like images and social media posts / groups.  We're putting them all in here, and making sure they line up</li>
+    <li>Build more user-friendly interfaces for entering things like disinformation situation reports quickly. You can see the visual components of these if you look at the techniques and countermeasures objects - and there's a hidden page /textgrid that we're testing out interface types in (there's also a map interface, but that's going to take a while. </li>
+    <li>Build connectors to tools like MISP - we already have DISARM frameworks embedded in it, and it would be useful to be able to send flash alerts about disinformation without filling in a *lot* of data fields</li>
+  </ul>
+
+  </div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Edit "{{ playbook.name }}"{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+    <label for="name">Name</label>
+    <input name="name" id="name"
+      value="{{ request.form['name'] or playbook.name }}" required>
+    <label for="object_id">Object id</label>
+    <input name="object_id" id="object_id"
+      value="{{ request.form['object_id'] or playbook.object_id }}" required>
+    <label for="disarm_id">Disarm id</label>
+    <input name="disarm_id" id="disarm_id"
+      value="{{ request.form['disarm_id'] or playbook.disarm_id }}" required>
+    <label for="summary">Body</label>
+    <textarea name="summary" id="summary">{{ request.form['summary'] or playbook.summary }}</textarea>
+    <input type="submit" value="Save">
+  </form>
+  <hr>
+  <form action="{{ url_for('playbook.delete', id=playbook.id) }}" method="post">
+    <input class="danger" type="submit" value="Delete" onclick="return confirm('Are you sure?');">
+  </form>
+{% endblock %}
+

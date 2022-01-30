@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Responsetypes{% endblock %}</h1>
+  {% if g.user %}
+    <a class="action" href="{{ url_for('responsetype.create') }}">New</a>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  {% for responsetype in responsetypes %}
+    <article class="responsetype">
+      <header>
+        <div>
+          <h1>{{ responsetype.disarm_id }} {{ responsetype.name }}</h1>
+        </div>
+      </header>
+      <p class="summary">Summary: {{ responsetype.summary }} - <a class="action" href="{{ url_for('responsetype.update', id=responsetype.id) }}">Edit</a></p>
+    </article>
+    {% if not loop.last %}
+      <hr>
+    {% endif %}
+  {% endfor %}
+{% endblock %}
+

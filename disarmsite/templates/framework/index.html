@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Frameworks{% endblock %}</h1>
+  {% if g.user %}
+    <a class="action" href="{{ url_for('framework.create') }}">New</a>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  {% for framework in frameworks %}
+    <article class="framework">
+      <header>
+        <div>
+          <h1>{{ framework['disarm_id'] }} {{ framework['name'] }}</h1>
+      </header>
+      <p class="summary">{{ framework['summary'] }} - <a class="action" href="{{ url_for('framework.update', id=framework['id']) }}">Edit</a></p>
+    </article>
+    {% if not loop.last %}
+      <hr>
+    {% endif %}
+  {% endfor %}
+{% endblock %}
+

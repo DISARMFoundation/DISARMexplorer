@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Detections{% endblock %}</h1>
+  {% if g.user %}
+    <a class="action" href="{{ url_for('detection.create') }}">New</a>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  {% for detection in detections %}
+    <article class="detection">
+      <header>
+        <div>
+          <h1>{{ detection['disarm_id'] }} {{ detection['name'] }}</h1>
+          <div class="tactic">Tactic stage: {{ detection['tactic_id'] }}</div>
+        </div>
+      </header>
+      <p class="summary">Summary: {{ detection['summary'] }} - <a class="action" href="{{ url_for('detection.view', id=detection['id']) }}">Details</a></p>
+    </article>
+    {% if not loop.last %}
+      <hr>
+    {% endif %}
+  {% endfor %}
+{% endblock %}
+
