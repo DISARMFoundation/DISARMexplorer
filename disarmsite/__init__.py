@@ -11,7 +11,7 @@ from . import counter
 from . import detection
 from . import example
 from . import framework
-from . import organization
+from . import externalgroup
 from . import incident
 from . import metatechnique
 from . import phase
@@ -90,7 +90,7 @@ def create_app(test_config=None):
     app.register_blueprint(detection.bp)
     app.register_blueprint(example.bp)
     app.register_blueprint(framework.bp)
-    app.register_blueprint(organization.bp)
+    app.register_blueprint(externalgroup.bp)
     app.register_blueprint(incident.bp)
     app.register_blueprint(metatechnique.bp)
     app.register_blueprint(phase.bp)

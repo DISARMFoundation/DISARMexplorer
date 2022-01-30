@@ -306,8 +306,8 @@ class IncidentTechnique(Base):
         return f'<IncidentTechnique {self.incident_id!r} {self.technique_id!r}>'
 
 
-class Group(Base):
-    __tablename__ = 'group'
+class Externalgroup(Base):
+    __tablename__ = 'externalgroup'
     id = Column(Integer, primary_key=True)
     disarm_id = Column(String(20), unique=True)
     name = Column(String(200))
@@ -373,7 +373,7 @@ class Tool(Base):
     disarm_id = Column(String(20), unique=True)
     name = Column(String(200))
     summary = Column(Text)
-    organization = Column(String(200))
+    externalgroup = Column(String(200))
     url = Column(Text)
     category = Column(String(200))
     disinformation_use = Column(String(200))
@@ -385,14 +385,14 @@ class Tool(Base):
     platform = Column(String(200))
     accessibility = Column(String(200))
 
-    # FIXIT: move from organization to group_id
-    def __init__(self, disarm_id=None, name=None, summary=None, organization=None, url=None, 
+    # FIXIT: move from externalgroup to group_id
+    def __init__(self, disarm_id=None, name=None, summary=None, externalgroup=None, url=None, 
         category=None, disinformation_use=None, cogseccollab_use=None, function=None, code_url=None, 
         artifacts=None, automation=None, platform=None, accessibility=None):
         self.disarm_id = disarm_id
         self.name = name
         self.summary = summary
-        self.organization = organization
+        self.externalgroup = externalgroup
         self.url = url
         self.category = category
         self.disinformation_use = disinformation_use

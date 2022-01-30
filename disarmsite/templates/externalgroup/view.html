@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}{{ externalgroup.disarm_id }} "{{ externalgroup.name }}"{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+
+<p class="url">URL: <a href="{{ externalgroup.url }}">{{ externalgroup.url }}</a></p>
+<p class="sector">Sector: {{ externalgroup.sector }}</p>
+<p class="primary_role">Primary role: {{ externalgroup.primary_role }}</p>
+<p class="secondary_role">Secondary role: {{ externalgroup.secondary_role }}</p>
+<p class="primary_subject">Primary subject: {{ externalgroup.primary_subject }}</p>
+<p class="secondary_subject">Secondary subject: {{ externalgroup.secondary_subject }}</p>
+<p class="volunteers">Has volunteers: {{ externalgroup.volunteers }}</p>
+<p class="region">Region: {{ externalgroup.region }}</p>
+<p class="country">Country: {{ externalgroup.country }}</p>
+<p class="twitter_handle">Twitter handle: {{ externalgroup.twitter_handle }}</p>
+<p class="summary">Summary: {{ externalgroup.summary }}</p>
+
+<p class="actions"><a class="action" href="{{ url_for('externalgroup.update', id=externalgroup.id) }}">Edit</a></p>
+{% endblock %}
+

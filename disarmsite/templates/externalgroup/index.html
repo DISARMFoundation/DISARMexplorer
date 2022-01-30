@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}External groups{% endblock %}</h1>
+  {% if g.user %}
+    <a class="action" href="{{ url_for('externalgroup.create') }}">New</a>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  {% for externalgroup in externalgroups %}
+    <article class="externalgroup">
+      <header>
+        <div>
+          <h1>{{ externalgroup.disarm_id }} {{ externalgroup.name }}</h1>
+        </div>
+      </header>
+      <p class="summary">Summary: {{ externalgroup.summary }} - <a class="action" href="{{ url_for('externalgroup.view', id=externalgroup.id) }}">Details</a></p>
+    </article>
+    {% if not loop.last %}
+      <hr>
+    {% endif %}
+  {% endfor %}
+{% endblock %}
+

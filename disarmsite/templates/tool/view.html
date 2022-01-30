@@ -7,7 +7,7 @@
 {% block content %}
 
 <p class="url">URL: <a href="{{ tool.url }}">{{ tool.url }}</a></p>
-<p class="organization">Organization: {{ tool.organization }}</p>
+<p class="organization">External group: {{ tool.group }}</p>
 <p class="category">Category: {{ tool.category }}</p>
 <p class="disinformation_use">Disinformation use: {{ tool.disinformation_use }}</p>
 <p class="cogseccollab_use">Cogseccollab use: {{ tool.cogseccollab_use }}</p>
@@ -19,6 +19,6 @@
 <p class="accessibility">Accessibility: {{ tool.accessibility }}</p>
 <p class="summary">Summary: {{ tool.summary }}</p>
 
-<p class="actions"><a class="action" href="{{ url_for('tool.update', id=tool.id) }}">Edit</a></p>
+<!--  <p class="actions"><a class="action" href="{{ url_for('tool.update', id=tool.id) }}">Edit</a></p> -->
 {% endblock %}
 
