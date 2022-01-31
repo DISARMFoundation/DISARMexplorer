@@ -9,6 +9,7 @@ from disarmsite.database import db_session
 from disarmsite.models import Technique
 from disarmsite.models import Example
 from disarmsite.models import Tactic
+from disarmsite.models import Phase
 from disarmsite.models import Counter
 from disarmsite.models import CounterTechnique
 from disarmsite.models import Detection
@@ -31,6 +32,8 @@ def get_technique(id, check_author=True):
 
 def create_technique_grid():
     techniques = Technique.query.join(Tactic).order_by("disarm_id")
+    tactics = Tactic.query.join(Phase).order_by("disarm_id")
+    print('tactics: {}'.format(tactics))
 
     # Create grid for clickable visualisation
     df = pd.read_sql(techniques.statement, techniques.session.bind)
@@ -41,9 +44,13 @@ def create_technique_grid():
 
     # Create dict for use in visualisation and list updates
     df.index = df.disarm_id
-    technique_names = df[['name']].transpose().to_dict('records')[0]
+    object_names = df[['name']].transpose().to_dict('records')[0]
+    dftactics = pd.read_sql(tactics.statement, techniques.session.bind)
+    dftactics.index = dftactics.disarm_id
+    tactic_names = dftactics[['name']].transpose().to_dict('records')[0]
+    object_names.update(tactic_names)
 
-    return techniques, techniques_grid, technique_names
+    return techniques, techniques_grid, object_names
 
 
 @bp.route('/')

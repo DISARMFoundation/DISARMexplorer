@@ -41,4 +41,20 @@ Datasets:
 <hr>
 </div>
 
+
+  <table>
+    <tr>
+      <td><div id="redgrid"></div></td>
+    </tr><tr>
+      <td><div id="bluegrid"></div></td>
+    </tr>
+  </table>
+
+<script type="text/javascript" src='static/textgrid.js'></script>
+<script type="text/javascript">
+    fillTable({{redgridparams|tojson}});
+    fillTable({{bluegridparams|tojson}});
+</script>
+
+
 {% endblock %}

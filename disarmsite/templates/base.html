@@ -3,9 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <title>{% block title %}{% endblock %} - Disarmsite</title>
+  <meta name="description" content="DISARM framework explorer">
+  <meta name="author" content="SJ Terp">
+  <title>{% block title %}{% endblock %} - Disarm Framework Explorer</title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" type="text/css" />
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
   <script src="https://d3js.org/d3.v4.min.js"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='textgrid.js') }}"></script>
@@ -13,7 +15,7 @@
 <body>
 
 <nav>
-  <h1><a href="{{ url_for('index') }}">DISARM</a></h1>
+  <h1><a href="{{ url_for('index') }}">DISARM Framework Explorer</a></h1>
   <ul>
     {% if g.user %}
       <li><span>{{ g.user['username'] }}</span>
@@ -34,6 +36,6 @@
   {% endfor %}
   {% block content %}{% endblock %}
 </section>
-
+<section class="footer">DISARM Frameworks provided CC-by-SA by the DISARM Foundation</section>
 </body>
 </html>

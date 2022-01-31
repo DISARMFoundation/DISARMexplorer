@@ -51,7 +51,11 @@ def create_app(test_config=None):
     # Main route: to index page
     @app.route('/')
     def index():
-        return render_template('index.html')
+        (techniques, techgrid, technames) = technique.create_technique_grid()
+        (counters, countergrid, counternames) = counter.create_counter_grid()
+        return render_template('index.html', redgridparams=["#redgrid", '#E74C3C', techgrid, technames],
+            bluegridparams=["#bluegrid", '#4641D6', countergrid, counternames])
+
 
     # About page
     @app.route('/about')
