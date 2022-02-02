@@ -28,10 +28,9 @@ Running on Heroku - getting set up
 * click "reveal config vars"
 * Edit DATABASE_URL: take a copy of it. It will start with "postgres://"
 * Create DATABASE_URL2: copy DATABASE_URL into it, but start it with start with "postgresql://" instead
+* heroku git:remote -a your-app-name (see https://devcenter.heroku.com/articles/git)
 
 Running on Heroku - updating Heroku code and database
-
-* before doing this: heroku git:remote -a your-app-name (see https://devcenter.heroku.com/articles/git)
 
 * pg_dump -Fc -h localhost -U <yourdatabaseusername> disarmsite > disarmsite.dump  
 * heroku pg:reset -a <your heroku app name>   
