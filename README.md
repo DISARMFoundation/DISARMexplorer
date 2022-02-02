@@ -9,7 +9,8 @@ Running locally - getting set up
 
 * install postgresql locally https://www.postgresql.org/
 * Use the DISARM repo to generate a database for you https://github.com/DISARMFoundation/DISARM file CODE/generate_DISARM_sql.ipynb will do this for you (run it using jupyter - install that using anaconda https://www.anaconda.com/). NB You might need to go to the terminal window and type "created disarmsite" first. 
-* Open a terminal window.  git clone this repo. cd into it   
+* Open a terminal window.  git clone this repo. cd into it 
+* Create a virtual environment: from the top folder of this repo, type "virtualenv venv" into the terminal window (see https://uoa-eresearch.github.io/eresearch-cookbook/recipe/2014/11/26/python-virtual-env/ for details).
 
 Running locally
 

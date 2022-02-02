@@ -1,18 +1,22 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1>{% block title %}Phases{% endblock %}</h1>
+  <h1>{% block title %}DISARM Phases{% endblock %}</h1>
   {% if g.user %}
     <a class="action" href="{{ url_for('phase.create') }}">New</a>
   {% endif %}
 {% endblock %}
 
 {% block content %}
+
+<p>A phase is the highest-level grouping of tactics and their associated techniques, corresponding to a logical stage in the execution of an influence campaign.</p>
+<p></p>
+
   {% for phase in phases %}
     <article class="phase">
       <header>
         <div>
-          <h1>{{ phase.disarm_id }} {{ phase.name }}</h1>
+          <h3>{{ phase.disarm_id }}: {{ phase.name }}</h3>
         </div>
       </header>
         <p class="summary">Summary: {{ phase.summary }} {% if g.user %}- <a class="action" href="{{ url_for('phase.update', id=phase.id) }}">Edit</a>{% endif %}

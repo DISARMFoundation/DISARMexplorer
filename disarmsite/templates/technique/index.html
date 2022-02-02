@@ -8,16 +8,20 @@
 {% endblock %}
 
 {% block content %}
+
+  <p>Techniques are the “how” of a particular tactic. Techniques are associated with one or more tactics, as a particular technique may be used to accomplish different goals. Techniques may also be formulated as what an actor gains by doing something. Like Tactics, a Technique name should always begin with a simple present tense action verb. Techniques can be combined to create procedures.</p>
+
   <div id="redgrid"></div>
   <script type="text/javascript">
     fillGrid({{gridparams|tojson}})
   </script>
 
   {% for technique in techniques %}
+    <p></p>
     <article class="technique">
       <header>
         <div>
-          <h1>{{ technique['disarm_id'] }} {{ technique['name'] }}</h1>
+          <h3>{{ technique['disarm_id'] }} {{ technique['name'] }}</h3>
           <div class="tactic">Tactic stage: {{ technique['tactic_id'] }}</div>
         </div>
       </header>

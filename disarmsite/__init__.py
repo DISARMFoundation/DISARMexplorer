@@ -49,18 +49,24 @@ def create_app(test_config=None):
         pass
 
     # Main route: to index page
+    # EDIT: changed top colours from red '#E74C3C' and blue '#4641D6' because they were hard to read. 
     @app.route('/')
     def index():
         (techniques, techgrid, technames) = technique.create_technique_grid()
         (counters, countergrid, counternames) = counter.create_counter_grid()
-        return render_template('index.html', redgridparams=["#redgrid", '#E74C3C', techgrid, technames],
-            bluegridparams=["#bluegrid", '#4641D6', countergrid, counternames])
+        return render_template('index.html', redgridparams=["#redgrid", '#F5B7B1', techgrid, technames],
+            bluegridparams=["#bluegrid", '#AED6F1', countergrid, counternames])
 
 
     # About page
     @app.route('/about')
     def about():
         return render_template('about.html')
+
+    # Objects page
+    @app.route('/objects')
+    def objects():
+        return render_template('objects.html')
 
     # Testing route: a simple page that says hello
     @app.route('/hello')

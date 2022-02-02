@@ -5,14 +5,19 @@
   {% if g.user %}
     <a class="action" href="{{ url_for('tactic.create') }}">New</a>
   {% endif %}
+
 {% endblock %}
 
 {% block content %}
+
+<p>A tactic is a way or means by which the objectives (ends) are met, and which does not prescribe either the specific techniques or procedures used to achieve it.
+</p>
+
   {% for tactic in tactics %}
     <article class="tactic">
       <header>
         <div>
-          <h1>{{ tactic['disarm_id'] }} {{ tactic['name'] }}</h1>
+          <h3>{{ tactic['disarm_id'] }} {{ tactic['name'] }}</h3>
           <div class="about">Phase: {{ tactic['phase_id'] }}</div>
         </div>
       </header>
