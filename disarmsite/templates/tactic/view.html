@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}{{ tactic.disarm_id }} "{{ tactic.name }}"{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+
+<p class="phase">Phase: {{ tactic.phase_id }}</p>
+<p class="summary">Summary: {{ tactic.summary }}</p>
+{% if g.user %}
+  <p class="actions"><a class="action" href="{{ url_for('tactic.update', id=tactic.id) }}">Edit</a>
+{% endif %}
+</p>
+
+<!-- <hr>
+<h3>Relationships</h3>
+<p class="techniques">Has techniques: 
+    {% for technique in techniques %}
+      <div class="technique"><a class="action" href="{{ url_for('technique.view', id=technique.id) }}">{{ technique.disarm_id }} {{ technique.name }}</a></div>
+  {% endfor %}
+</p>
+
+<p class="counters">Has counters: 
+    {% for counter in counters %}
+      <div class="counter"><a class="action" href="{{ url_for('counter.view', id=counter.id) }}">{{ counter.disarm_id }} {{ counter.name }}</a></div>
+  {% endfor %}
+</p>
+ -->
+<!-- <p class="detections">Detection methods include: 
+    {% for detection in detections %}
+      <div class="detection"><a class="action" href="{{ url_for('detection.view', id=detection.id) }}">{{ detection.disarm_id }} {{ detection.name }}</a></div>
+  {% endfor %}
+</p>
+ -->
+ 
+<!-- <hr>
+<h3>Datasets</h3>
+
+<p class="incidents">Seen in incidents: 
+  <ul>
+    {% for incident in incidents %}
+      <div class="incident"><li><strong>{{ incident.incident_id }}</strong> as {{ incident.name }}: {{ incident.summary }}</li></div>
+    {% endfor %}
+  </ul>
+</p>
+ -->
+{% endblock %}
+

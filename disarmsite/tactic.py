@@ -6,6 +6,9 @@ from werkzeug.exceptions import abort
 from disarmsite.auth import login_required
 from disarmsite.database import db_session
 from disarmsite.models import Tactic
+from disarmsite.models import Technique
+from disarmsite.models import Counter
+from disarmsite.models import Detection
 from disarmsite.models import Phase
 
 
@@ -13,10 +16,12 @@ bp = Blueprint('tactic', __name__, url_prefix='/tactic')
 
 
 def get_tactic(id, check_author=True):
-    tactic = Tactic.query.join(Phase).filter(Tactic.id == id )
+    tactic = Tactic.query.join(Phase).filter(Tactic.id == id ).first()
     if tactic is None:
         abort(404, f"Tactic id {id} doesn't exist.")
-    return tactic
+    techniques = Technique.query.filter(Technique.tactic_id == tactic.disarm_id).order_by("disarm_id")
+    counters = Counter.query.filter(Counter.tactic_id == tactic.disarm_id).order_by("disarm_id")
+    return (tactic, techniques, counters)
 
 
 @bp.route('/')
@@ -49,11 +54,16 @@ def create():
 
     return render_template('tactic/create.html')
 
+@bp.route('/<int:id>/view', methods=('GET', 'POST'))
+def view(id):
+    (tactic, techniques, counters) = get_tactic(id)
+    return render_template('tactic/view.html', tactic=tactic, techniques=techniques, counters=counters)
+
 
 @bp.route('/<int:id>/update', methods=('GET', 'POST'))
 @login_required
 def update(id):
-    tactic = get_tactic(id)
+    (tactic, techniques, counters) = get_tactic(id)
 
     if request.method == 'POST':
         name = request.form['name']
@@ -78,7 +88,7 @@ def update(id):
 @bp.route('/<int:id>/delete', methods=('POST',))
 @login_required
 def delete(id):
-    tactic = get_tactic(id)
+    (tactic, techniques, counters) = get_tactic(id)
     db_session.delete(tactic)
     db_session.commit()
     return redirect(url_for('tactic.index'))

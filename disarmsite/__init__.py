@@ -52,7 +52,7 @@ def create_app(test_config=None):
     # EDIT: changed top colours from red '#E74C3C' and blue '#4641D6' because they were hard to read. 
     @app.route('/')
     def index():
-        (techniques, techgrid, technames) = technique.create_technique_grid()
+        (techniques, techgrid, technames, techurls) = technique.create_technique_grid()
         (counters, countergrid, counternames) = counter.create_counter_grid()
         return render_template('index.html', redgridparams=["#redgrid", '#F5B7B1', techgrid, technames],
             bluegridparams=["#bluegrid", '#AED6F1', countergrid, counternames])
@@ -75,10 +75,9 @@ def create_app(test_config=None):
 
     @app.route('/textgrid')
     def textgrid():
-        (techniques, techgrid, technames) = technique.create_technique_grid()
+        (techniques, techgrid, technames, techurls) = technique.create_technique_grid()
         (counters, countergrid, counternames) = counter.create_counter_grid()
-        return render_template('textgrid.html', redgridparams=["#redgrid", '#E74C3C', techgrid, technames],
-            bluegridparams=["#bluegrid", '#4641D6', countergrid, counternames])
+        return render_template('textgrid.html', redgridparams=["#redgrid", '#E74C3C', techgrid, technames, techurls])
 
 
     @app.route('/mapblobs')

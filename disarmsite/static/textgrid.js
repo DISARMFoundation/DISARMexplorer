@@ -330,3 +330,127 @@ function fillTable(params) {
 
 }
 
+
+function fillHtmlSimpleTable(params) {
+	// useful for creating lists of e.g. techniques
+
+	// grab dataset from input parameters
+	var grid_div = params[0]; 
+	var topcolor = params[1];
+	var object_grid = params[2]; 
+	var object_names = params[3]; 
+	console.log(object_names);
+
+	var numrows = object_grid.length;
+	var numcols = object_grid[0].length;
+
+	var boxwidth = 75;
+	var boxheight = 50;
+	var boxoffcolor = '#D0D3D4';
+	var boxoncolor = "#50C878";
+	
+
+	// grab dataset
+	var data = new Array();
+	data = populatedata(object_grid, object_names, numrows, numcols, topcolor, boxwidth, boxheight, boxoncolor, boxoffcolor);
+  console.log(data)
+
+  var table = d3.select(grid_div).append('table');
+  var thead = table.append('thead');
+  var tbody = table.append('tbody');
+  var columns = ['disarmid', 'disarmname'];
+
+  thead.append('tr')
+    .selectAll('th')
+    .data(columns).enter()
+    .append('th')
+      .text(function (column) { return column; });
+
+		// create a row for each object in the data
+		var rows = tbody.selectAll('tr')
+		  .data(data)
+		  .enter()
+		  .append('tr');
+
+		// create a cell in each row for each column
+		var cells = rows.selectAll('td')
+		  .data(function (row) {
+		    return columns.map(function (column) {
+		      return {column: column, value: row[column]};
+		    });
+		  })
+		  .enter()
+		  .append('td')
+		    .text(function (d) { return d.value; });
+
+	  return table;
+
+}
+
+function fillHtmlTable(params) {
+
+	// grab dataset from input parameters
+	var grid_div = params[0]; 
+	var topcolor = params[1];
+	var object_grid = params[2]; 
+	var object_names = params[3]; 
+	var object_urls = params[4]; 
+	console.log(object_names);
+
+	var numrows = object_grid.length;
+	var numcols = object_grid[0].length;
+
+	var boxwidth = 75;
+	var boxheight = 50;
+	var boxoffcolor = '#D0D3D4';
+	var boxoncolor = "#50C878";
+	
+
+	// grab dataset
+	var data = new Array();
+	data = populatedata(object_grid, object_names, numrows, numcols, topcolor, boxwidth, boxheight, boxoncolor, boxoffcolor);
+  console.log(data)
+
+  var table = d3.select(grid_div).append('table');
+  var thead = table.append('thead');
+  var tbody = table.append('tbody');
+  var columns = object_grid[0];
+
+  thead.append('tr')
+    .selectAll('th')
+    .data(columns).enter()
+    .append('th')
+		// .html(function(d) {
+  // 		  return "<a href=" + object_urls[d] + ">" + d + ": " + object_names[d] + "</a>";
+  // 	};
+    .text(function (column) { return column + ": " + object_names[column]; });
+
+		// create a row for each object in the data
+		var rows = tbody.selectAll('tr')
+		  .data(object_grid.slice(1))
+		  .enter()
+		  .append('tr');
+
+		// create a cell in each row for each column
+		var cells = rows.selectAll('td')
+      .data(function(d) {return d; })
+		  .enter()
+		  .append('td')
+		  .html(function(d) {
+		  	if (d.length>0){
+  		  	return "<a href=" + object_urls[d] + ">" + d + ": " + object_names[d] + "</a>";
+		  	}
+		  	else {
+          return "";
+		  	}
+		  // .text(function (d) { return })
+		  // .on("click",function(d,i) { alert("Clicked on the text");})
+		  // .append("a")
+		  // .attr("href", function(d) {
+		  // 	return "example.com"
+		  });
+
+	  return table;
+
+}
+

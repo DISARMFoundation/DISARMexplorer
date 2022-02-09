@@ -32,6 +32,7 @@ def get_technique(id, check_author=True):
 
 def create_technique_grid():
     techniques = Technique.query.join(Tactic).order_by("disarm_id")
+    print('{}'.format(techniques))
     tactics = Tactic.query.join(Phase).order_by("disarm_id")
     print('tactics: {}'.format(tactics))
 
@@ -45,17 +46,31 @@ def create_technique_grid():
     # Create dict for use in visualisation and list updates
     df.index = df.disarm_id
     object_names = df[['name']].transpose().to_dict('records')[0]
+
+    # Create dict containing object URLs
+    def get_technique_url(tid):
+        return url_for('technique.view', id=tid)
+    df['url'] = df['id'].apply(get_technique_url)
+    object_urls = df[['url']].transpose().to_dict('records')[0]
+
+    # Add tactics ids
     dftactics = pd.read_sql(tactics.statement, techniques.session.bind)
     dftactics.index = dftactics.disarm_id
     tactic_names = dftactics[['name']].transpose().to_dict('records')[0]
     object_names.update(tactic_names)
 
-    return techniques, techniques_grid, object_names
+    def get_tactic_url(tid):
+        return url_for('tactic.view', id=tid)
+    dftactics['url'] = dftactics['id'].apply(get_tactic_url)
+    tactic_urls = dftactics[['url']].transpose().to_dict('records')[0]
+    object_urls.update(tactic_urls)
+
+    return techniques, techniques_grid, object_names, object_urls
 
 
 @bp.route('/')
 def index():
-    techniques, techgrid, technames = create_technique_grid()
+    techniques, techgrid, technames, techurls = create_technique_grid()
 
     return render_template('technique/index.html', techniques=techniques, 
         gridparams=["#redgrid", '#E74C3C', techgrid, technames])
