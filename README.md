@@ -32,9 +32,9 @@ Running on Heroku - getting set up
 
 Running on Heroku - updating Heroku code and database
 
-* pg_dump -Fc -h localhost -U <yourdatabaseusername> disarmsite > disarmsite.dump  
-* heroku pg:reset -a <your heroku app name>   
-* heroku pg:push disarmsite DATABASE_URL -a <your heroku app name> 
+* pg_dump -Fc -h localhost -U \<yourdatabaseusername\> disarmsite > disarmsite.dump  
+* heroku pg:reset -a \<your heroku app name\>   
+* heroku pg:push disarmsite DATABASE_URL -a \<your heroku app name\> 
 * git add .; git commit -m "heroku stuff"; git push heroku main
 
 
