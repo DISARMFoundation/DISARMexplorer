@@ -1,18 +1,20 @@
-# DISARM Flask website
+# DISARM Explorer code
 Code for an online viewer of the DISARM frameworks and datasets. 
 
 Written in Python, Flask, D3. 
 
 ## How to make this run
 
-Running locally - getting set up
+### Running locally
+
+Getting set up to run the code
 
 * install postgresql locally https://www.postgresql.org/
 * Use the DISARM repo to generate a database for you https://github.com/DISARMFoundation/DISARM file CODE/generate_DISARM_pages.ipynb will do this for you (run it using jupyter - install that using anaconda https://www.anaconda.com/). NB You might need to go to the terminal window and type "create disarmsite" first. 
 * Open a terminal window.  git clone this repo. cd into it 
 * Create a virtual environment: from the top folder of this repo, type "virtualenv venv" into the terminal window (see https://uoa-eresearch.github.io/eresearch-cookbook/recipe/2014/11/26/python-virtual-env/ for details).
 
-Running locally
+Running the code
 
 * . venv/bin/activate; 
 * export FLASK_APP=disarmsite; export FLASK_ENV=development; export DATABASE_URL2="postgresql:///disarmsite"
@@ -20,7 +22,9 @@ Running locally
 * go to http://127.0.0.1:5000/
 
 
-Running on Heroku - getting set up
+###Running on Heroku 
+
+Getting set up to run on Heroku
 
 * Create a heroku account. Create an app. 
 * Click on the app, then the resources tab. Add the Postgres add-on.  
