@@ -6,12 +6,15 @@
 
 {% block content %}
 
+<div id="redgrid"></div>
 
-	<div id="redgrid"></div>
+
+<p><div id="bluegrid"></div>
 
 
 	<script type="text/javascript">
 	    fillHtmlTable({{redgridparams|tojson}});
+	    fillHtmlTable({{bluegridparams|tojson}});
 	</script>
 
 {% endblock %}

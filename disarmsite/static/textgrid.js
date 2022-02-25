@@ -115,7 +115,7 @@ function fillGrid(params) {
 	var topcolor = params[1];
 	var object_grid = params[2]; 
 	var object_names = params[3]; 
-	console.log(object_names);
+	//console.log(object_names);
 
 	var numrows = object_grid.length;
 	var numcols = object_grid[0].length;
@@ -129,7 +129,7 @@ function fillGrid(params) {
 	// grab dataset
 	var data = new Array();
 	data = populatedata(object_grid, object_names, numrows, numcols, topcolor, boxwidth, boxheight, boxoncolor, boxoffcolor);
-  console.log(data)
+  //console.log(data)
 
 	//Create the grid
 	var grid = d3.select(grid_div)
@@ -201,7 +201,7 @@ function fillTable(params) {
 	var topcolor = params[1];
 	var object_grid = params[2]; 
 	var object_names = params[3]; 
-	console.log(object_names);
+	//console.log(object_names);
 
 	var numrows = object_grid.length;
 	var numcols = object_grid[0].length;
@@ -215,7 +215,7 @@ function fillTable(params) {
 	// grab dataset
 	var data = new Array();
 	data = populatedata(object_grid, object_names, numrows, numcols, topcolor, boxwidth, boxheight, boxoncolor, boxoffcolor);
-  console.log(data)
+  //console.log(data)
 
 	//Create the grid
 	var grid = d3.select(grid_div)
@@ -291,7 +291,7 @@ function fillHtmlTable(params) {
 	var object_names = params[3]; 
 	var object_urls = params[4]; 
 	var tableheading = params[5];
-	console.log(object_names);
+	// console.log(object_names);
 
 	var numrows = object_grid.length;
 	var numcols = object_grid[0].length;
@@ -300,12 +300,16 @@ function fillHtmlTable(params) {
 	var boxheight = 50;
 	var boxoffcolor = '#D0D3D4';
 	var boxoncolor = "#50C878";
+	var boxstates = {};
+	for (var key in object_names){
+		boxstates[key] = 0;
+	}
 	
 
 	// grab dataset
 	var data = new Array();
 	data = populatedata(object_grid, object_names, numrows, numcols, topcolor, boxwidth, boxheight, boxoncolor, boxoffcolor);
-  console.log(data)
+  // console.log(data)
 
   var table = d3.select(grid_div).append('table'),
     caption = table.append("caption"),
@@ -313,8 +317,10 @@ function fillHtmlTable(params) {
 		tbody = table.append('tbody');
   var columns = object_grid[0];
 
-  var caption = d3.select("thead").append("tr").append("th").attr("colspan", columns.length);
-  caption.html("<b>" + tableheading + "</b>");
+  var caption = thead.append("tr").append("th").attr("colspan", columns.length);
+  caption.html("<b>" + tableheading + "</b>")
+    .style('background-color', topcolor)
+    .style("font-size", "20px");
 
   thead.append('tr')
     .selectAll('th')
@@ -336,17 +342,18 @@ function fillHtmlTable(params) {
       .data(function(d) {return d; })
 		  .enter()
 		  .append('td')
-			.on('click', function(d) {
-		       d.state = 1 - d.state;
-		       if (d.state == 0 ) { d3.select(d).style("fill",function(d) { return d.offcolor;}); }
-			   if (d.state == 1 ) { d3.select(d).style("fill",function(d) { return d.oncolor;}); }
-		  })
+		  // .on('click', toggle)
+			// .on('click', function(d, i) {
+		 //       d.state = 1 - d.state;
+		 //       if (d.state == 0 ) { d3.select(d).style("background-color",function(d) { return d.offcolor;}); }
+			//    if (d.state == 1 ) { d3.select(d).style("background-color",function(d) { return d.oncolor;}); }
+		 //  })
 		  .attr("class", function(d) { return d; })
 		  .attr("id", function(d) { return d; })
 		  .style('background-color', function(d) { if (d.length>0) return boxoffcolor; })
 		  .html(function(d) {
 		  	if (d.length>0){
-  		  	return "<a href=" + object_urls[d] + ">" + d + ": " + object_names[d] + "</a>";
+  		  	return "<a href=" + object_urls[d] + ' target="_blank" rel="noopener noreferrer">' + d + ": " + object_names[d] + "</a>";
 		  	}
 		  	else {
           return "";
@@ -358,12 +365,25 @@ function fillHtmlTable(params) {
 		  // 	return "example.com"
 		  });
 
-		  cells.on("click", toggle)
-		    .on("mouseover", mouse);
+
+			cells.on('click', function(d) {
+				  console.log("state: "+ boxstates[d])
+		       boxstates[d] = 1 - boxstates[d];
+		       if (boxstates[d] == 0 ) { d3.select(this).style("background-color", boxoffcolor)}
+ 			     if (boxstates[d] == 1 ) { d3.select(this).style("background-color", boxoncolor)}
+		  })
+
+		  // cells.on("click", toggle)
+		  //   .on("mouseover", mouse);
 
 		  function toggle(d, i){
-//		  	d3.select(d).style("background-color",function(x) { return x.oncolor;});
-		  	d3.select(this).style("background-color", "blue");
+		  	x = d3.select(this);
+		  	x.style("background-color", this.oncolor);
+		  	// x.style("background-color", "blue");
+		  	// d.state = 1 - d.state;
+		   //  if (d.state == 0 ) { x.style("fill",function(d) { return d.offcolor;}); }
+			  // if (d.state == 1 ) { x.style("fill",function(d) { return d.oncolor;}); }
+
 		  	console.log('toggled '+ i + ":" + d);
 		  };
 

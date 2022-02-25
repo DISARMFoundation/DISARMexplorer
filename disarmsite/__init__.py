@@ -53,9 +53,10 @@ def create_app(test_config=None):
     @app.route('/')
     def index():
         (techniques, techgrid, technames, techurls) = technique.create_technique_grid()
-        (counters, countergrid, counternames) = counter.create_counter_grid()
-        return render_template('index.html', redgridparams=["#redgrid", '#F5B7B1', techgrid, technames],
-            bluegridparams=["#bluegrid", '#AED6F1', countergrid, counternames])
+        (counters, countergrid, counternames, counterurls) = counter.create_counter_grid()
+        return render_template('index.html', 
+            redgridparams=["#redgrid", '#F5B7B1', techgrid, technames, techurls, "DISARM Red Framework - incident creator TTPs"],
+            bluegridparams=["#bluegrid", '#AED6F1', countergrid, counternames, counterurls, "DISARM Blue Framework - responder TTPs"])
 
 
     # About page
@@ -76,9 +77,11 @@ def create_app(test_config=None):
     @app.route('/textgrid')
     def textgrid():
         (techniques, techgrid, technames, techurls) = technique.create_technique_grid()
-        (counters, countergrid, counternames) = counter.create_counter_grid()
+        (counters, countergrid, counternames, counterurls) = counter.create_counter_grid()
         return render_template('textgrid.html', 
-            redgridparams=["#redgrid", '#E74C3C', techgrid, technames, techurls, "DISARM Red Framework - incident creator TTPs"])
+            redgridparams=["#redgrid", '#E74C3C', techgrid, technames, techurls, "DISARM Red Framework - incident creator TTPs"],
+            bluegridparams=["#bluegrid", '#AED6F1', countergrid, counternames, counterurls, "DISARM Blue Framework - responder TTPs"],
+            )
 
 
     @app.route('/mapblobs')
