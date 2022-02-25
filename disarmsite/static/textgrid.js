@@ -312,20 +312,19 @@ function fillHtmlTable(params) {
   // console.log(data)
 
   var table = d3.select(grid_div).append('table'),
-    caption = table.append("caption"),
 		thead = table.append('thead'),
 		tbody = table.append('tbody');
   var columns = object_grid[0];
 
-  var caption = thead.append("tr").append("th").attr("colspan", columns.length);
+  var caption = thead.append("tr").append("td").attr("colspan", columns.length);
   caption.html("<b>" + tableheading + "</b>")
     .style('background-color', topcolor)
     .style("font-size", "20px");
 
   thead.append('tr')
-    .selectAll('th')
+    .selectAll('td')
     .data(columns).enter()
-    .append('th')
+    .append('td')
 		// .html(function(d) {
   // 		  return "<a href=" + object_urls[d] + ">" + d + ": " + object_names[d] + "</a>";
   // 	};

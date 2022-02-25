@@ -8,27 +8,63 @@
 
   <div>
 
-<p>DISARM is a set of frameworks for describing and understanding disinformation incidents. <a class="about" href="{{ url_for('about') }}">Learn more about DISARM</a></p>
+<p>DISARM is a set of frameworks for describing and understanding disinformation incidents. 
+<br><a class="about" href="{{ url_for('about') }}">Learn more about DISARM</a></p>
 <hr>
   </div>
   <div>
 
-<h3>DISARM Frameworks</h3>
+<h3>DISARM Objects</h3>
+
+The disarm frameworks contain many object types, including tactic stages (steps in an incident), and techniques (activities at each tactic stage).  We also have data objects to show how the frameworks are used in practice, and to make our datasets on tools and responders available. 
+
+<table border=1>
+  <tr><td colspan=6><b>Framework objects</b></td></tr>
+  <tr>
+    <td><a class="framework" href="{{ url_for('framework.index') }}">Frameworks</a></td>
+    <td><a class="phase" href="{{ url_for('phase.index') }}">Phases</a></td>
+    <td><a class="tactic" href="{{ url_for('tactic.index') }}">Tactics</a></td>
+    <td><a class="technique" href="{{ url_for('technique.index') }}">Techniques</a></td>
+    <td><a class="task" href="{{ url_for('task.index') }}">Tasks</a></td>
+    <td><a class="counter" href="{{ url_for('counter.index') }}">Countermeasures</a></td>
+  </tr>
+  <tr>
+    <td><a class="detection" href="{{ url_for('detection.index') }}">Detections</a></td>
+    <td><a class="responsetype" href="{{ url_for('responsetype.index') }}">Responsetypes</a></td>
+    <td><a class="metatechnique" href="{{ url_for('metatechnique.index') }}">Metatechniques</a></td>
+    <td><a class="playbook" href="{{ url_for('playbook.index') }}">Playbooks</a></td>
+    <td><a class="resource" href="{{ url_for('resource.index') }}">Resources</a></td>
+    <!-- Add: actortypes,  -->
+  </tr>
+  <tr><td colspan=6><b>Data objects</b></td></tr>
+  <tr>
+    <td><a class="incident" href="{{ url_for('incident.index') }}">Incidents</a></td>
+    <td><a class="example" href="{{ url_for('example.index') }}">Examples</a></td>
+    <td><a class="group" href="{{ url_for('externalgroup.index') }}">External Groups</a></td>
+    <td><a class="tool" href="{{ url_for('tool.index') }}">Tools</a></td>
+  </tr>
+</table>
+
 
 Disarm objects are described in detail <a class="objects" href="{{ url_for('objects') }}">here</a>. 
 
 <hr>
+<h3>DISARM Frameworks</h3>
+
+<p>Frameworks are organised ways of describing and analysing disinformation behaviours.  DISARM has two main frameworks: DISARM Red, for describing incident creator behaviours, and DISARM Blue, to describe potential response behaviours. </p>
+<p>  </p>
+
 </div>
 
 
-  <table>
-    <tr>
-      <td><div id="redgrid"></div></td>
-    </tr><tr>
-    </tr><tr>
-      <td><div id="bluegrid"></div></td>
-    </tr>
-  </table>
+<div id="redgrid"></div>
+
+<p>  </p>
+<p>  </p>
+<p>  </p>
+
+<div id="bluegrid"></div>
+
 
 <script type="text/javascript" src='static/textgrid.js'></script>
 <script type="text/javascript">
