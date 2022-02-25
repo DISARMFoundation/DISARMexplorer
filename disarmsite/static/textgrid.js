@@ -1,6 +1,12 @@
 
+// Code that creates the framework grid visualisations seen on the front page, in the
+// techniques and counters pages etc. 
+//
+// SJ Terp, 2021
+
 
 function wrap(text, width) {
+	// "wraps" a line of text by splitting it across several lines
   text.each(function() {
     var text = d3.select(this),
         words = text.text().split(/\s+/).reverse(),
@@ -26,6 +32,8 @@ function wrap(text, width) {
 
 
 function populatedata(object_grid, object_names, numrows, numcols, topcolor, boxwidth, boxheight, boxoncolor, boxoffcolor) {
+
+  // Creates the javascript object "data" that's used by the rest of the code
 
 	var data = new Array();
 	var xpos = 1; //starting xpos and ypos at 1 so grid edges are visible
@@ -98,71 +106,9 @@ function populatedata(object_grid, object_names, numrows, numcols, topcolor, box
 }
 
 
-function fillGridOld(params) {
-
-	// grab dataset from input parameters
-	var grid_div = params[0]; 
-	var topcolor = params[1];
-	var object_grid = params[2]; 
-	var object_names = params[3]; 
-	console.log(object_names);
-
-	var numrows = object_grid.length;
-	var numcols = object_grid[0].length;
-
-	var boxwidth = 110;
-	var boxheight = 50;
-	var boxoffcolor = '#D0D3D4';
-	var boxoncolor = "#50C878";
-	
-
-	// grab dataset
-	var data = new Array();
-	data = populatedata(object_grid, object_names, numrows, numcols, topcolor, boxwidth, boxheight, boxoncolor, boxoffcolor);
-
-	//Create the grid
-	var grid = d3.select(grid_div)
-		.append("svg")
-		.attr("width",boxwidth*numcols+10+"px")
-		.attr("height",boxheight*numrows+10+"px");
-	
-	// Fill the grid
-	var box = grid.selectAll("g")
-		.data(data)
-		.enter().append("g")
-		.attr("class", "box");
-		
-	box.append("rect")
-		.attr("class","square")
-		.attr("x", function(d) { return d.x; })
-		.attr("y", function(d) { return d.y; })
-		.attr("disarmid", function(d) { return d.disarmid; })
-		.attr("width", function(d) { return d.width; })
-		.attr("height", function(d) { return d.height; })
-		.style("fill", function(d) { return d.offcolor; })
-		.style("stroke", "#222")
-		.style("font-size", "9px")
-		.on('click', function(d) {
-	       d.state = 1 - d.state;
-	       if (d.state == 0 ) { d3.select(this).style("fill",function(d) { return d.offcolor;}); }
-		   if (d.state == 1 ) { d3.select(this).style("fill",function(d) { return d.oncolor;}); }
-	  });
-
-	box.append("text")
-		.attr("x", function(d) { return d.x + 3; })
-		.attr("y", function(d) { return d.y + boxheight/2; })
-		.attr("class", "wrapme")
-		.attr("dy", ".20em")
-		.attr("font-size", "9px")
-		.text(function(d) { return d.disarmname; });
-
-	//d3.selectAll('.wrapme').call(wrap);
-
-}
-
-
 
 function fillGrid(params) {
+	// Used in technique index, counters index
 
 	// grab dataset from input parameters
 	var grid_div = params[0]; 
@@ -247,6 +193,8 @@ function fillGrid(params) {
 }
 
 function fillTable(params) {
+	// Creates the array of buttons 
+	// used on the front page
 
 	// grab dataset from input parameters
 	var grid_div = params[0]; 
@@ -331,63 +279,10 @@ function fillTable(params) {
 }
 
 
-function fillHtmlSimpleTable(params) {
-	// useful for creating lists of e.g. techniques
-
-	// grab dataset from input parameters
-	var grid_div = params[0]; 
-	var topcolor = params[1];
-	var object_grid = params[2]; 
-	var object_names = params[3]; 
-	console.log(object_names);
-
-	var numrows = object_grid.length;
-	var numcols = object_grid[0].length;
-
-	var boxwidth = 75;
-	var boxheight = 50;
-	var boxoffcolor = '#D0D3D4';
-	var boxoncolor = "#50C878";
-	
-
-	// grab dataset
-	var data = new Array();
-	data = populatedata(object_grid, object_names, numrows, numcols, topcolor, boxwidth, boxheight, boxoncolor, boxoffcolor);
-  console.log(data)
-
-  var table = d3.select(grid_div).append('table');
-  var thead = table.append('thead');
-  var tbody = table.append('tbody');
-  var columns = ['disarmid', 'disarmname'];
-
-  thead.append('tr')
-    .selectAll('th')
-    .data(columns).enter()
-    .append('th')
-      .text(function (column) { return column; });
-
-		// create a row for each object in the data
-		var rows = tbody.selectAll('tr')
-		  .data(data)
-		  .enter()
-		  .append('tr');
-
-		// create a cell in each row for each column
-		var cells = rows.selectAll('td')
-		  .data(function (row) {
-		    return columns.map(function (column) {
-		      return {column: column, value: row[column]};
-		    });
-		  })
-		  .enter()
-		  .append('td')
-		    .text(function (d) { return d.value; });
-
-	  return table;
-
-}
 
 function fillHtmlTable(params) {
+	// Creates the table with clickable text 
+	// used in textgrid
 
 	// grab dataset from input parameters
 	var grid_div = params[0]; 
@@ -395,6 +290,7 @@ function fillHtmlTable(params) {
 	var object_grid = params[2]; 
 	var object_names = params[3]; 
 	var object_urls = params[4]; 
+	var tableheading = params[5];
 	console.log(object_names);
 
 	var numrows = object_grid.length;
@@ -411,10 +307,14 @@ function fillHtmlTable(params) {
 	data = populatedata(object_grid, object_names, numrows, numcols, topcolor, boxwidth, boxheight, boxoncolor, boxoffcolor);
   console.log(data)
 
-  var table = d3.select(grid_div).append('table');
-  var thead = table.append('thead');
-  var tbody = table.append('tbody');
+  var table = d3.select(grid_div).append('table'),
+    caption = table.append("caption"),
+		thead = table.append('thead'),
+		tbody = table.append('tbody');
   var columns = object_grid[0];
+
+  var caption = d3.select("thead").append("tr").append("th").attr("colspan", columns.length);
+  caption.html("<b>" + tableheading + "</b>");
 
   thead.append('tr')
     .selectAll('th')
@@ -436,6 +336,14 @@ function fillHtmlTable(params) {
       .data(function(d) {return d; })
 		  .enter()
 		  .append('td')
+			.on('click', function(d) {
+		       d.state = 1 - d.state;
+		       if (d.state == 0 ) { d3.select(d).style("fill",function(d) { return d.offcolor;}); }
+			   if (d.state == 1 ) { d3.select(d).style("fill",function(d) { return d.oncolor;}); }
+		  })
+		  .attr("class", function(d) { return d; })
+		  .attr("id", function(d) { return d; })
+		  .style('background-color', function(d) { if (d.length>0) return boxoffcolor; })
 		  .html(function(d) {
 		  	if (d.length>0){
   		  	return "<a href=" + object_urls[d] + ">" + d + ": " + object_names[d] + "</a>";
@@ -450,7 +358,20 @@ function fillHtmlTable(params) {
 		  // 	return "example.com"
 		  });
 
+		  cells.on("click", toggle)
+		    .on("mouseover", mouse);
+
+		  function toggle(d, i){
+//		  	d3.select(d).style("background-color",function(x) { return x.oncolor;});
+		  	d3.select(this).style("background-color", "blue");
+		  	console.log('toggled '+ i + ":" + d);
+		  };
+
+		  function mouse(d, i){		  	
+		  };
+
 	  return table;
 
 }
+
 

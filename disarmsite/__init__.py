@@ -77,7 +77,8 @@ def create_app(test_config=None):
     def textgrid():
         (techniques, techgrid, technames, techurls) = technique.create_technique_grid()
         (counters, countergrid, counternames) = counter.create_counter_grid()
-        return render_template('textgrid.html', redgridparams=["#redgrid", '#E74C3C', techgrid, technames, techurls])
+        return render_template('textgrid.html', 
+            redgridparams=["#redgrid", '#E74C3C', techgrid, technames, techurls, "DISARM Red Framework - incident creator TTPs"])
 
 
     @app.route('/mapblobs')
