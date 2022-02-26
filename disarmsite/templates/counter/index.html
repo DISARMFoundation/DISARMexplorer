@@ -10,7 +10,7 @@
 {% block content %}
   <div id="bluegrid"></div>
   <script type="text/javascript">
-    fillGrid({{gridparams|tojson}})
+    fillHtmlTable({{gridparams|tojson}})
   </script>
 
   {% for counter in counters %}

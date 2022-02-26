@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}{{ metatechnique.disarm_id }}: {{ metatechnique.name }}{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+
+<p class="summary">Summary: {{ metatechnique.summary }}</p>
+{% if g.user %}
+  <p class="actions"><a class="action" href="{{ url_for('metatechnique.update', id=metatechnique.id) }}">Edit</a>
+{% endif %}
+</p>
+
+<table width=100% border=1 class='counters'>
+  <tr><td colspan=3 bgcolor=lightblue text-align=left><b>Counters in {{ metatechnique.disarm_id }}</b></td></tr>
+  <tr><td><b>disarm_id</b></td><td><b>name</b></td><td><b>summary</b></td></tr>
+
+  {% for counter in counters %}
+    <tr class='counter'>
+      <td><a class="action" href="{{ url_for('counter.view', id=counter.id) }}">{{ counter.disarm_id }}</a></td>
+      <td>{{ counter.name }}</td>
+      <td>{{ counter.summary }}</td>
+    </tr>
+  {% endfor %}
+</table>
+
+ 
+{% endblock %}
+

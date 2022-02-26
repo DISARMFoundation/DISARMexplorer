@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}{{ phase.disarm_id }}: {{ phase.name }}{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+
+<p class="summary">Summary: {{ phase.summary }}</p>
+{% if g.user %}
+  <p class="actions"><a class="action" href="{{ url_for('phase.update', id=phase.id) }}">Edit</a>
+{% endif %}
+</p>
+
+<!-- table width=100% border=1 class='tasks'>
+  <tr><td colspan=3 bgcolor=lightblue text-align=left><b>{{ phase.disarm_id }} Tasks</b></td></tr>
+  <tr><td><b>disarm_id</b></td><td><b>name</b></td><td><b>summary</b></td></tr>
+
+  {% for task in tasks %}
+    <tr class='task'>
+      <td><a class="action" href="{{ url_for('task.view', id=task.id) }}">{{ task.disarm_id }}</a></td>
+      <td>{{ task.name }}</td>
+      <td>{{ task.summary }}</td>
+    </tr>
+  {% endfor %}
+</table>
+ -->
+ 
+{% endblock %}
+

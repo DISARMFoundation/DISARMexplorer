@@ -18,9 +18,9 @@
 Framework objects:
 <ul>
     <li><a class="framework" href="{{ url_for('framework.index') }}">Frameworks</a></li>
-    <li><a class="phase" href="{{ url_for('phase.index') }}">Phases</a></li>
-    <li><a class="tactic" href="{{ url_for('tactic.index') }}">Tactics</a></li>
-    <li><a class="technique" href="{{ url_for('technique.index') }}">Techniques</a></li>
+    <li><a class="phase" href="{{ url_for('phase.index') }}">Phases</a>: A phase is the highest-level grouping of tactics and their associated techniques, corresponding to a logical stage in the execution of an influence campaign.</li>
+    <li><a class="tactic" href="{{ url_for('tactic.index') }}">Tactics</a>: A tactic is a way or means by which the objectives (ends) are met, and which does not prescribe either the specific techniques or procedures used to achieve it.</li>
+    <li><a class="technique" href="{{ url_for('technique.index') }}">Techniques</a>: Techniques are the “how” of a particular tactic. Techniques are associated with one or more tactics, as a particular technique may be used to accomplish different goals. Techniques may also be formulated as what an actor gains by doing something. Like Tactics, a Technique name should always begin with a simple present tense action verb. Techniques can be combined to create procedures.</li>
     <li><a class="task" href="{{ url_for('task.index') }}">Tasks</a></li>
     <li><a class="counter" href="{{ url_for('counter.index') }}">Countermeasures</a></li>
     <li><a class="detection" href="{{ url_for('detection.index') }}">Detections</a></li>

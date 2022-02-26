@@ -6,44 +6,69 @@
 
 {% block content %}
 
-<p class="phase">Phase: {{ tactic.phase_id }}</p>
+<p class="phase">Belongs to phase <a class="action" href="{{ url_for('phase.view', id=phase.id) }}">{{ phase.disarm_id }} {{ phase.name }}</a> </p>
 <p class="summary">Summary: {{ tactic.summary }}</p>
 {% if g.user %}
   <p class="actions"><a class="action" href="{{ url_for('tactic.update', id=tactic.id) }}">Edit</a>
 {% endif %}
 </p>
 
-<!-- <hr>
-<h3>Relationships</h3>
-<p class="techniques">Has techniques: 
-    {% for technique in techniques %}
-      <div class="technique"><a class="action" href="{{ url_for('technique.view', id=technique.id) }}">{{ technique.disarm_id }} {{ technique.name }}</a></div>
-  {% endfor %}
-</p>
+<p>  </p>
+<table width=100% border=1 class='tasks'>
+  <tr><td colspan=3 bgcolor=lightblue text-align=left><b>{{ tactic.disarm_id }} Tasks</b></td></tr>
+  <tr><td><b>disarm_id</b></td><td><b>name</b></td><td><b>summary</b></td></tr>
 
-<p class="counters">Has counters: 
-    {% for counter in counters %}
-      <div class="counter"><a class="action" href="{{ url_for('counter.view', id=counter.id) }}">{{ counter.disarm_id }} {{ counter.name }}</a></div>
+  {% for task in tasks %}
+    <tr class='task'>
+      <td><a class="action" href="{{ url_for('task.view', id=task.id) }}">{{ task.disarm_id }}</a></td>
+      <td>{{ task.name }}</td>
+      <td>{{ task.summary }}</td>
+    </tr>
   {% endfor %}
-</p>
- -->
-<!-- <p class="detections">Detection methods include: 
-    {% for detection in detections %}
-      <div class="detection"><a class="action" href="{{ url_for('detection.view', id=detection.id) }}">{{ detection.disarm_id }} {{ detection.name }}</a></div>
+</table>
+
+<p>  </p>
+<table width=100% border=1 class='techniques'>
+  <tr><td colspan=3 bgcolor=lightblue text-align=left><b>{{ tactic.disarm_id }} Techniques</b></td></tr>
+  <tr><td><b>disarm_id</b></td><td><b>name</b></td><td><b>summary</b></td></tr>
+
+  {% for technique in techniques %}
+    <tr class='technique'>
+      <td><a class="action" href="{{ url_for('technique.view', id=technique.id) }}">{{ technique.disarm_id }}</a></td>
+      <td>{{ technique.name }}</td>
+      <td>{{ technique.summary }}</td>
+    </tr>
   {% endfor %}
-</p>
- -->
+</table>
+
+<p>  </p>
+<table width=100% border=1 class='counters'>
+  <tr><td colspan=3 bgcolor=lightblue text-align=left><b>{{ tactic.disarm_id }} Counters</b></td></tr>
+  <tr><td><b>disarm_id</b></td><td><b>name</b></td><td><b>summary</b></td></tr>
+
+  {% for counter in counters %}
+    <tr class='counter'>
+      <td><a class="action" href="{{ url_for('counter.view', id=counter.id) }}">{{ counter.disarm_id }}</a></td>
+      <td>{{ counter.name }}</td>
+      <td>{{ counter.summary }}</td>
+    </tr>
+  {% endfor %}
+</table>
+
+<p>  </p>
+<table width=100% border=1 class='detections'>
+  <tr><td colspan=3 bgcolor=lightblue text-align=left><b>{{ tactic.disarm_id }} Detections</b></td></tr>
+  <tr><td><b>disarm_id</b></td><td><b>name</b></td><td><b>summary</b></td></tr>
+
+  {% for detection in detections %}
+    <tr class='detection'>
+      <td><a class="action" href="{{ url_for('detection.view', id=detection.id) }}">{{ detection.disarm_id }}</a></td>
+      <td>{{ detection.name }}</td>
+      <td>{{ detection.summary }}</td>
+    </tr>
+  {% endfor %}
+</table>
  
-<!-- <hr>
-<h3>Datasets</h3>
 
-<p class="incidents">Seen in incidents: 
-  <ul>
-    {% for incident in incidents %}
-      <div class="incident"><li><strong>{{ incident.incident_id }}</strong> as {{ incident.name }}: {{ incident.summary }}</li></div>
-    {% endfor %}
-  </ul>
-</p>
- -->
 {% endblock %}
 

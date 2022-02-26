@@ -73,7 +73,8 @@ def index():
     techniques, techgrid, technames, techurls = create_technique_grid()
 
     return render_template('technique/index.html', techniques=techniques, 
-        gridparams=["#redgrid", '#E74C3C', techgrid, technames])
+        gridparams=["#redgrid", '#E74C3C', techgrid, technames, techurls, 
+        "DISARM Red Framework - incident creator TTPs"])
 
 
 

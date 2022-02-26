@@ -15,7 +15,7 @@
           <h1>{{ metatechnique['disarm_id'] }} {{ metatechnique['name'] }}</h1>
         </div>
       </header>
-      <p class="summary">Summary: {{ metatechnique['summary'] }} {% if g.user %}- <a class="action" href="{{ url_for('metatechnique.update', id=metatechnique['id']) }}">Edit</a>{% endif %}
+      <p class="summary">Summary: {{ metatechnique['summary'] }} - <a class="action" href="{{ url_for('metatechnique.view', id=metatechnique['id']) }}">Details</a></p> {% if g.user %}  - <a class="action" href="{{ url_for('metatechnique.update', id=metatechnique['id']) }}">Edit</a>{% endif %}
 </p>
     </article>
     {% if not loop.last %}

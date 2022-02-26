@@ -47,6 +47,12 @@ def create():
     return render_template('phase/create.html')
 
 
+@bp.route('/<int:id>/view', methods=('GET', 'POST'))
+def view(id):
+    (phase) = get_phase(id)
+    return render_template('phase/view.html', phase=phase)
+
+
 @bp.route('/<int:id>/update', methods=('GET', 'POST'))
 @login_required
 def update(id):

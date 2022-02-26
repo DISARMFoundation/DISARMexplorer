@@ -5,6 +5,7 @@ from werkzeug.exceptions import abort
 
 from disarmsite.auth import login_required
 from disarmsite.database import db_session
+from disarmsite.models import Task
 from disarmsite.models import Tactic
 from disarmsite.models import Technique
 from disarmsite.models import Counter
@@ -19,9 +20,12 @@ def get_tactic(id, check_author=True):
     tactic = Tactic.query.join(Phase).filter(Tactic.id == id ).first()
     if tactic is None:
         abort(404, f"Tactic id {id} doesn't exist.")
+    phase = Phase.query.filter(Phase.disarm_id == tactic.phase_id).first()
+    tasks = Task.query.filter(Task.tactic_id == tactic.disarm_id).order_by("disarm_id")
     techniques = Technique.query.filter(Technique.tactic_id == tactic.disarm_id).order_by("disarm_id")
     counters = Counter.query.filter(Counter.tactic_id == tactic.disarm_id).order_by("disarm_id")
-    return (tactic, techniques, counters)
+    detections = Detection.query.filter(Detection.tactic_id == tactic.disarm_id).order_by("disarm_id")
+    return (tactic, phase, tasks, techniques, counters, detections)
 
 
 @bp.route('/')
@@ -56,14 +60,16 @@ def create():
 
 @bp.route('/<int:id>/view', methods=('GET', 'POST'))
 def view(id):
-    (tactic, techniques, counters) = get_tactic(id)
-    return render_template('tactic/view.html', tactic=tactic, techniques=techniques, counters=counters)
+    (tactic, phase, tasks, techniques, counters, detections) = get_tactic(id)
+    print('{}'.format(tactic))
+    return render_template('tactic/view.html', tactic=tactic, phase=phase, tasks=tasks, 
+        techniques=techniques, counters=counters, detections=detections)
 
 
 @bp.route('/<int:id>/update', methods=('GET', 'POST'))
 @login_required
 def update(id):
-    (tactic, techniques, counters) = get_tactic(id)
+    (tactic, phase, tasks, techniques, counters, detections) = get_tactic(id)
 
     if request.method == 'POST':
         name = request.form['name']
@@ -88,7 +94,7 @@ def update(id):
 @bp.route('/<int:id>/delete', methods=('POST',))
 @login_required
 def delete(id):
-    (tactic, techniques, counters) = get_tactic(id)
+    (tactic, phase, tasks, techniques, counters, detections) = get_tactic(id)
     db_session.delete(tactic)
     db_session.commit()
     return redirect(url_for('tactic.index'))

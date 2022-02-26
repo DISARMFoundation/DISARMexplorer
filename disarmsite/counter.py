@@ -61,9 +61,9 @@ def create_counter_grid():
 
 @bp.route('/')
 def index():
-    counters, countgrid, countnames = create_counter_grid()
+    counters, countgrid, countnames, counturls = create_counter_grid()
     return render_template('counter/index.html', counters=counters, 
-        gridparams=["#bluegrid", '#4641D6', countgrid, countnames])
+        gridparams=["#bluegrid", '#4641D6', countgrid, countnames, counturls, "DISARM Blue Framework - responder TTPs"])
 
 
 @bp.route('/<int:id>/view', methods=('GET', 'POST'))

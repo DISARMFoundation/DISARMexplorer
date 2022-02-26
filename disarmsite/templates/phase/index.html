@@ -19,7 +19,7 @@
           <h3>{{ phase.disarm_id }}: {{ phase.name }}</h3>
         </div>
       </header>
-        <p class="summary">Summary: {{ phase.summary }} {% if g.user %}- <a class="action" href="{{ url_for('phase.update', id=phase.id) }}">Edit</a>{% endif %}
+        <p class="summary">Summary: {{ phase.summary }} - <a class="action" href="{{ url_for('phase.view', id=phase['id']) }}">Details</a> {% if g.user %}- <a class="action" href="{{ url_for('phase.update', id=phase.id) }}">Edit</a>{% endif %}
         </p>
     </article>
     {% if not loop.last %}

@@ -6,6 +6,7 @@ from werkzeug.exceptions import abort
 from disarmsite.auth import login_required
 from disarmsite.database import db_session
 from disarmsite.models import Metatechnique
+from disarmsite.models import Counter
 
 
 bp = Blueprint('metatechnique', __name__, url_prefix='/metatechnique')
@@ -13,8 +14,9 @@ bp = Blueprint('metatechnique', __name__, url_prefix='/metatechnique')
 def get_metatechnique(id, check_author=True):
     metatechnique = Metatechnique.query.filter(Metatechnique.id == id).first()
     if metatechnique is None:
-        abort(404, f"Task id {id} doesn't exist.")
-    return metatechnique
+        abort(404, f"Metatechnique id {id} doesn't exist.")
+    counters = Counter.query.filter(Counter.metatechnique_id == metatechnique.disarm_id).order_by("disarm_id")
+    return metatechnique, counters
 
 
 @bp.route('/')
@@ -25,8 +27,9 @@ def index():
 
 @bp.route('/<int:id>/view', methods=('GET', 'POST'))
 def view(id):
-    metatechnique = get_metatechnique(id)
-    return render_template('metatechnique/view.html', metatechnique=metatechnique)
+    (metatechnique, counters) = get_metatechnique(id)
+    return render_template('metatechnique/view.html', metatechnique=metatechnique,
+        counters=counters)
 
 
 @bp.route('/create', methods=('GET', 'POST'))
@@ -55,7 +58,7 @@ def create():
 @bp.route('/<int:id>/update', methods=('GET', 'POST'))
 @login_required
 def update(id):
-    metatechnique = get_metatechnique(id)
+    (metatechnique, counters) = get_metatechnique(id)
 
     if request.method == 'POST':
         name = request.form['name']
@@ -80,7 +83,7 @@ def update(id):
 @bp.route('/<int:id>/delete', methods=('POST',))
 @login_required
 def delete(id):
-    metatechnique = get_metatechnique(id)
+    (metatechnique, counters) = get_metatechnique(id)
     db_session.delete(metatechnique)
     db_session.commit()
     return redirect(url_for('metatechnique.index'))
