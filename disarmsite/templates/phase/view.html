@@ -12,19 +12,19 @@
 {% endif %}
 </p>
 
-<!-- table width=100% border=1 class='tasks'>
-  <tr><td colspan=3 bgcolor=lightblue text-align=left><b>{{ phase.disarm_id }} Tasks</b></td></tr>
+<p>  </p>
+<table width=100% border=1 class='tasks'>
+  <tr><td colspan=3 bgcolor=lightblue text-align=left><b>{{ phase.disarm_id }} Tactic stages</b></td></tr>
   <tr><td><b>disarm_id</b></td><td><b>name</b></td><td><b>summary</b></td></tr>
 
-  {% for task in tasks %}
-    <tr class='task'>
-      <td><a class="action" href="{{ url_for('task.view', id=task.id) }}">{{ task.disarm_id }}</a></td>
-      <td>{{ task.name }}</td>
-      <td>{{ task.summary }}</td>
+  {% for tactic in tactics %}
+    <tr class='tactic'>
+      <td><a class="action" href="{{ url_for('tactic.view', id=tactic.id) }}">{{ tactic.disarm_id }}</a></td>
+      <td>{{ tactic.name }}</td>
+      <td>{{ tactic.summary }}</td>
     </tr>
   {% endfor %}
 </table>
- -->
  
 {% endblock %}
 

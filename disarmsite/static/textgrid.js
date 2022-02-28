@@ -31,7 +31,7 @@ function wrap(text, width) {
 }
 
 
-function populatedata(object_grid, object_names, numrows, numcols, topcolor, boxwidth, boxheight, boxoncolor, boxoffcolor) {
+function populatedata(object_grid, object_names, topcolor, boxwidth, boxheight, boxoncolor, boxoffcolor) {
 
   // Creates the javascript object "data" that's used by the rest of the code
 
@@ -40,6 +40,9 @@ function populatedata(object_grid, object_names, numrows, numcols, topcolor, box
 	var ypos = 1;
 	var boxstate = 0;
 	var maxlen = 16;
+	var numrows = object_grid.length;
+	var numcols = object_grid[0].length;
+
 
 	// set position, width/height/text/number of clicks per box
 	for (var row = 0; row < numrows; row++) {
@@ -120,9 +123,6 @@ function fillHtmlTable(params) {
 	var tableheading = params[5];
 	// console.log(object_names);
 
-	var numrows = object_grid.length;
-	var numcols = object_grid[0].length;
-
 	var boxwidth = 75;
 	var boxheight = 50;
 	var boxoffcolor = '#D0D3D4';
@@ -135,7 +135,8 @@ function fillHtmlTable(params) {
 
 	// grab dataset
 	var data = new Array();
-	data = populatedata(object_grid, object_names, numrows, numcols, topcolor, boxwidth, boxheight, boxoncolor, boxoffcolor);
+	data = populatedata(object_grid, object_names, topcolor, 
+		boxwidth, boxheight, boxoncolor, boxoffcolor);
   // console.log(data)
 
   var table = d3.select(grid_div).append('table'),
@@ -152,9 +153,9 @@ function fillHtmlTable(params) {
     .selectAll('td')
     .data(columns).enter()
     .append('td')
-    .html(function (column) { 
+    .html(function (d) { 
     	// return column + ": " + object_names[column]; 
-  		return "<a href=" + object_urls[column] + ' target="_blank" rel="noopener noreferrer">' + column + ": " + object_names[column] + "</a>";
+  		return "<a href=" + object_urls[d] + ' target="_blank" rel="noopener noreferrer">' + d + ": " + object_names[d] + "</a>";
     });
 
 		// create a row for each object in the data
