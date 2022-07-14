@@ -32,25 +32,20 @@ def get_technique(id, check_author=True):
 
 def create_technique_grid():
     techniques = Technique.query.join(Tactic).order_by("disarm_id")
-    tactics = Tactic.query.join(Phase).order_by("disarm_id")
+    tactics = Tactic.query.join(Phase).order_by("rank")
     phases = Phase.query.order_by("disarm_id")
 
-    dftech = pd.read_sql(techniques.statement, techniques.session.bind)
+    dftech = pd.read_sql(techniques.statement, techniques.session.bind)#.sort_values('rank')
     dftactics = pd.read_sql(tactics.statement, tactics.session.bind)
-
+    dftactics['rank'] = dftactics['rank'].astype(int)
+    dftactics.sort_values('rank', inplace=True)
     # Create grid for clickable visualisation
     dflists = dftech.groupby('tactic_id')['disarm_id'].apply(list).reset_index()
+    dflists = pd.merge(dflists, dftactics[['disarm_id', 'rank']], left_on='tactic_id', right_on='disarm_id', 
+        suffixes = ('', '_tactic')).sort_values('rank')
+    dflists['disarm_id'] = dflists['disarm_id'].apply(sorted)
     dfidgrid = pd.DataFrame(dflists['disarm_id'].to_list())
-    dfgrid = pd.concat([dflists[['tactic_id']], dfidgrid], axis=1).fillna('')
-    # dflists = dftech.groupby('tactic_id')['disarm_id'].apply(list).reset_index()
-    # dflists = (dflists.rename(columns={'disarm_id': 'technique_id'})
-    #  .merge(dftactics.rename(columns={'disarm_id': 'tactic_id'})[['tactic_id', 'phase_id', 'rank']], on='tactic_id')
-    #  .sort_values('rank'))
-    # grid = []
-    # for row in dflists.iterrows():
-    #     rowdata = row[1]
-    #     grid += [[rowdata['tactic_id']]+ rowdata['technique_id']]
-    # dfgrid = pd.DataFrame(grid).fillna('')#.transpose()
+    dfgrid = pd.concat([dflists[['tactic_id']].reset_index(drop=True), dfidgrid], axis=1).fillna('')
     techniques_grid = [dfgrid[col].to_list() for col in dfgrid.columns]
 
     # Create dict for use in visualisation and list updates
